@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/meta/page")({
+export const Route = createFileRoute("/meta/title")({
   component: RouteComponent,
   head: ({ matches }) => {
     console.log("All matches:", matches);

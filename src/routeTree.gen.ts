@@ -21,6 +21,7 @@ import { Route as UsersIndexRouteImport } from './routes/users.index'
 import { Route as PostsIndexRouteImport } from './routes/posts.index'
 import { Route as UsersUserIdRouteImport } from './routes/users.$userId'
 import { Route as PostsPostIdRouteImport } from './routes/posts.$postId'
+import { Route as MetaTitleRouteImport } from './routes/meta/title'
 import { Route as MetaPageRouteImport } from './routes/meta/page'
 import { Route as PathlessLayoutNestedLayoutRouteImport } from './routes/_pathlessLayout/_nested-layout'
 import { Route as PostsPostIdDeepRouteImport } from './routes/posts_.$postId.deep'
@@ -81,6 +82,11 @@ const PostsPostIdRoute = PostsPostIdRouteImport.update({
   path: '/$postId',
   getParentRoute: () => PostsRoute,
 } as any)
+const MetaTitleRoute = MetaTitleRouteImport.update({
+  id: '/meta/title',
+  path: '/meta/title',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MetaPageRoute = MetaPageRouteImport.update({
   id: '/meta/page',
   path: '/meta/page',
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/redirect': typeof RedirectRoute
   '/users': typeof UsersRouteWithChildren
   '/meta/page': typeof MetaPageRoute
+  '/meta/title': typeof MetaTitleRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts/': typeof PostsIndexRoute
@@ -144,6 +151,7 @@ export interface FileRoutesByTo {
   '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
   '/meta/page': typeof MetaPageRoute
+  '/meta/title': typeof MetaTitleRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts': typeof PostsIndexRoute
@@ -162,6 +170,7 @@ export interface FileRoutesById {
   '/users': typeof UsersRouteWithChildren
   '/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteWithChildren
   '/meta/page': typeof MetaPageRoute
+  '/meta/title': typeof MetaTitleRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts/': typeof PostsIndexRoute
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/redirect'
     | '/users'
     | '/meta/page'
+    | '/meta/title'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts/'
@@ -192,6 +202,7 @@ export interface FileRouteTypes {
     | '/deferred'
     | '/redirect'
     | '/meta/page'
+    | '/meta/title'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts'
@@ -209,6 +220,7 @@ export interface FileRouteTypes {
     | '/users'
     | '/_pathlessLayout/_nested-layout'
     | '/meta/page'
+    | '/meta/title'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts/'
@@ -226,6 +238,7 @@ export interface RootRouteChildren {
   RedirectRoute: typeof RedirectRoute
   UsersRoute: typeof UsersRouteWithChildren
   MetaPageRoute: typeof MetaPageRoute
+  MetaTitleRoute: typeof MetaTitleRoute
   PostsPostIdDeepRoute: typeof PostsPostIdDeepRoute
 }
 export interface FileServerRoutesByFullPath {
@@ -328,6 +341,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/posts/$postId'
       preLoaderRoute: typeof PostsPostIdRouteImport
       parentRoute: typeof PostsRoute
+    }
+    '/meta/title': {
+      id: '/meta/title'
+      path: '/meta/title'
+      fullPath: '/meta/title'
+      preLoaderRoute: typeof MetaTitleRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/meta/page': {
       id: '/meta/page'
@@ -466,6 +486,7 @@ const rootRouteChildren: RootRouteChildren = {
   RedirectRoute: RedirectRoute,
   UsersRoute: UsersRouteWithChildren,
   MetaPageRoute: MetaPageRoute,
+  MetaTitleRoute: MetaTitleRoute,
   PostsPostIdDeepRoute: PostsPostIdDeepRoute,
 }
 export const routeTree = rootRouteImport
