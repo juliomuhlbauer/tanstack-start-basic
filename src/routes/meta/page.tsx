@@ -16,8 +16,8 @@ export const Route = createFileRoute("/meta/page")({
     return {
       meta: [
         {
-          // @ts-ignore
-          title: `Page - ${meta.title}`,
+          // title: `Page - ${meta.title}`,
+          title: "Page",
         },
       ],
     };
